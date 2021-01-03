@@ -1,0 +1,8 @@
+{
+  "version": "1.0.0",
+  "name": "@types/just",
+  "types": "index.d.ts",
+  "author": "Daniel Imfeld <dimfeld>",
+  "license": "MIT",
+  "main": ""
+}
