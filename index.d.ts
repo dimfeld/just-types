@@ -34,6 +34,13 @@ declare module 'just-debounce-it' {
   export = debounce;
 }
 
+declare module 'just-extend' {
+  function extend<T extends object>(deep: boolean, ...o: Partial<T>[]): T;
+  function extend<T extends object>(...o: Partial<T>[]): T;
+
+  export = extend;
+}
+
 declare module 'just-filter-object' {
   /** Filter out key/value pairs of an object, based on the given function. */
   function filter<T extends object>(
@@ -121,6 +128,8 @@ declare module 'just-omit' {
     value: T,
     ...keys: U[]
   ): Omit<T, U>;
+  function omit<T extends object>(value: T, keys: string[]): Partial<T>;
+  function omit<T extends object>(value: T, ...keys: string[]): Partial<T>;
   export = omit;
 }
 
@@ -138,6 +147,8 @@ declare module 'just-pick' {
     value: T,
     ...keys: U[]
   ): Pick<T, U>;
+  function pick<T extends object>(value: T, keys: string[]): Partial<T>;
+  function pick<T extends object>(value: T, ...keys: string[]): Partial<T>;
   export = pick;
 }
 
@@ -219,58 +230,59 @@ declare module 'just-safe-get' {
     defaultValue: T[K1][K2][K3][K4]
   ): T[K1][K2][K3][K4];
 
-  function get<
-    T extends object,
-    K1 extends keyof T,
-    K2 extends keyof T[K1],
-    K3 extends keyof T[K1][K2],
-    K4 extends keyof T[K1][K2][K3],
-    K5 extends keyof T[K1][K2][K3][K4]
-  >(obj: T, path: [K1, K2, K3, K4, K5]): T[K1][K2][K3][K4][K5] | undefined;
-  function get<
-    T extends object,
-    K1 extends keyof T,
-    K2 extends keyof T[K1],
-    K3 extends keyof T[K1][K2],
-    K4 extends keyof T[K1][K2][K3],
-    K5 extends keyof T[K1][K2][K3][K4]
-  >(
-    obj: T,
-    path: [K1, K2, K3, K4, K5],
-    defaultValue: T[K1][K2][K3][K4][K5]
-  ): T[K1][K2][K3][K4][K5];
+ 
+   function get<
+     T extends object,
+     K1 extends keyof T,
+     K2 extends keyof T[K1],
+     K3 extends keyof T[K1][K2],
+     K4 extends keyof T[K1][K2][K3],
+     K5 extends keyof T[K1][K2][K3][K4]
+   >(obj: T, path: [K1, K2, K3, K4, K5]): T[K1][K2][K3][K4][K5] | undefined;
+   function get<
+     T extends object,
+     K1 extends keyof T,
+     K2 extends keyof T[K1],
+     K3 extends keyof T[K1][K2],
+     K4 extends keyof T[K1][K2][K3],
+     K5 extends keyof T[K1][K2][K3][K4]
+   >(
+     obj: T,
+     path: [K1, K2, K3, K4, K5],
+     defaultValue: T[K1][K2][K3][K4][K5]
+   ): T[K1][K2][K3][K4][K5];
 
-  function get<T extends object, U = unknown>(
-    obj: T,
-    path: (string | Symbol | number)[]
-  ): U | undefined;
-  function get<T extends object, U = unknown>(
-    obj: T,
-    path: (string | Symbol | number)[],
-    defaultValue: U
-  ): U;
+   function get<T extends object, U = unknown>(
+     obj: T,
+     path: (string | Symbol | number)[]
+   ): U | undefined;
+   function get<T extends object, U = unknown>(
+     obj: T,
+     path: (string | Symbol | number)[],
+     defaultValue: U
+   ): U;
 
-  function get<T extends object, U = unknown>(
-    obj: T,
-    path: string | Symbol
-  ): U | undefined;
-  function get<T extends object, U = unknown>(
-    obj: T,
-    path: string | Symbol,
-    defaultValue: U
-  ): U;
+   function get<T extends object, U = unknown>(
+     obj: T,
+     path: string | Symbol
+   ): U | undefined;
+   function get<T extends object, U = unknown>(
+     obj: T,
+     path: string | Symbol,
+     defaultValue: U
+   ): U;
 
-  export = get;
-}
+   export = get;
+ }
 
-declare module 'just-safe-set' {
-  function set(
-    obj: object,
-    path: string | Symbol | number | (string | Symbol | number)[],
-    value: any
-  ): boolean;
-  export = set;
-}
+ declare module 'just-safe-set' {
+   function set(
+     obj: object,
+     path: string | Symbol | number | (string | Symbol | number)[],
+     value: any
+   ): boolean;
+   export = set;
+ }
 
 declare module 'just-throttle' {
   /**
